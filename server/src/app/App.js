@@ -6,6 +6,9 @@ import { redirectUrlController } from '../controllers/url.controller.js'
 const app = express()
 app.use(express.json())
 
+app.get('/', (req, res) => {
+  res.send('Server is running 🚀')
+})
 app.use('/api/url',router)
 
 
