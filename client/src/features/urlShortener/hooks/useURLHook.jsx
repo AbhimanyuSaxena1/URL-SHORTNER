@@ -24,7 +24,7 @@ import { toast } from 'react-toastify'
 
   const getAllUrls = async () => {
     try{
-      const res = await axiosInstance.get('/api/url/All')
+      const res = await axiosInstance.get('/api/url/all')
       setShortenedUrls(res.data.urls)
     }
     catch (error) {
