@@ -67,9 +67,9 @@ const UrlList = () => {
                         day: '2-digit',
                         month: 'short',
                         year: 'numeric'
-                      })}
+                      })} | Clicks {urlObj.clicks}
                     </p>
-
+                      
                     <a
                       href={shortUrl}
                       target="_blank"
