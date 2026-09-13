@@ -6,14 +6,15 @@ import { toast } from 'react-toastify'
  const useURLHook = () => {
     const [url, setUrl] = useState('')
     const [shortenedUrls, setShortenedUrls] = useState([])
-      const [copiedId, setCopiedId] = useState(null)
-    
+    const [copiedId, setCopiedId] = useState(null)
+    const [loading,setLoading] = useState(true)
   const handleSubmit =async (e) => {
     e.preventDefault()
-    console.log('URL to shorten:', url) 
+   
     try{
        await axiosInstance.post('/api/url/create',{url:url})
       toast.success('URL Created Successfully')
+     
       
     }
     catch (error) {
@@ -27,6 +28,7 @@ import { toast } from 'react-toastify'
     try{
       const res = await axiosInstance.get('/api/url/all')
       setShortenedUrls(res.data.urls)
+      setLoading(false)
     }
     catch (error) {
       console.error('Error fetching URLs:', error)
@@ -62,7 +64,8 @@ import { toast } from 'react-toastify'
     handleCopy,
     copiedId,
     setCopiedId,
-    handleDelete
+    handleDelete,
+    loading,
   }
 }
 

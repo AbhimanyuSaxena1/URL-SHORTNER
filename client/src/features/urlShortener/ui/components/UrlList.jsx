@@ -1,15 +1,19 @@
-
 import React, { useEffect, useState } from 'react'
 import useURLHook from '../../hooks/useURLHook'
 
 const UrlList = () => {
-  const { getAllUrls, shortenedUrls, handleCopy, copiedId, handleDelete } = useURLHook()
+  const {
+    getAllUrls,
+    shortenedUrls,
+    handleCopy,
+    loading,
+    copiedId,
+    handleDelete
+  } = useURLHook()
 
   useEffect(() => {
     getAllUrls()
   }, [shortenedUrls])
-
-
 
   return (
     <div className="w-full">
@@ -20,6 +24,7 @@ const UrlList = () => {
           <h2 className="text-xl font-semibold text-white">
             Your Shortened URLs
           </h2>
+
           <p className="mt-1 text-sm text-gray-500">
             Manage and access your shortened links
           </p>
@@ -30,8 +35,14 @@ const UrlList = () => {
         </span>
       </div>
 
+      {/* Loading */}
+      {loading ? (
+        <div className="flex items-center justify-center py-10">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-white/20 border-t-white"></div>
+        </div>
+      ) : shortenedUrls.length === 0 ? (
 
-      {shortenedUrls.length === 0 ? (
+        /* Empty State */
         <div className="rounded-2xl border border-dashed border-white/10 bg-white/[0.03] px-6 py-12 text-center">
           <div className="mb-3 text-4xl">
             🔗
@@ -45,7 +56,10 @@ const UrlList = () => {
             Your shortened links will appear here.
           </p>
         </div>
+
       ) : (
+
+        /* URL List */
         <div className="space-y-3">
 
           {shortenedUrls.map((urlObj) => {
@@ -63,13 +77,13 @@ const UrlList = () => {
                   <div className="min-w-0 flex-1">
 
                     <p className="mb-1 text-xs font-medium uppercase tracking-wider text-gray-500">
-                      Short URL | Created At -  {new Date(urlObj.createdAt).toLocaleDateString('en-IN', {
+                      Short URL | Created At - {new Date(urlObj.createdAt).toLocaleDateString('en-IN', {
                         day: '2-digit',
                         month: 'short',
                         year: 'numeric'
                       })} | Clicks {urlObj.clicks}
                     </p>
-                      
+
                     <a
                       href={shortUrl}
                       target="_blank"
@@ -107,16 +121,19 @@ const UrlList = () => {
                     {/* Copy */}
                     <button
                       onClick={() => handleCopy(shortUrl, urlObj._id)}
-                      className={`rounded-lg px-4 py-2 text-sm font-medium cursor-pointer transition ${copiedId === urlObj._id
+                      className={`rounded-lg px-4 py-2 text-sm font-medium cursor-pointer transition ${
+                        copiedId === urlObj._id
                           ? 'bg-green-500/10 text-green-400'
                           : 'bg-blue-600 text-white hover:bg-blue-500'
-                        }`}
+                      }`}
                     >
                       {copiedId === urlObj._id ? '✓ Copied' : 'Copy'}
                     </button>
+
+                    {/* Delete */}
                     <button
                       onClick={() => handleDelete(urlObj._id)}
-                      className='rounded-lg px-4 py-2 text-sm font-medium transition bg-red-500 text-white hover:bg-red-400 cursor-pointer  '
+                      className="rounded-lg px-4 py-2 text-sm font-medium transition bg-red-500 text-white hover:bg-red-400 cursor-pointer"
                     >
                       Delete
                     </button>
@@ -129,6 +146,7 @@ const UrlList = () => {
 
         </div>
       )}
+
     </div>
   )
 }
