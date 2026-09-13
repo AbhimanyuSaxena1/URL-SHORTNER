@@ -12,13 +12,14 @@ import { toast } from 'react-toastify'
     e.preventDefault()
     console.log('URL to shorten:', url) 
     try{
-      const res = await axiosInstance.post('/api/url/create',{url})
+       await axiosInstance.post('/api/url/create',{url:url})
+      toast.success('URL Created Successfully')
       
     }
     catch (error) {
       console.error('Error shortening URL:', error)
+      toast.error("Server Error")
     }
-    toast.success('URL Created Successfully')
     setUrl('') 
   }
 

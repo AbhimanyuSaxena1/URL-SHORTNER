@@ -1,12 +1,11 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import useURLHook from '../../hooks/useURLHook'
 
 import UrlList from './UrlList.jsx'
 
 const ShortenForm = () => {
-  const { url, setUrl, handleSubmit } = useURLHook()
-
+  const { url, setUrl, handleSubmit,getAllUrls,shortenedUrls } = useURLHook()
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 px-4 py-16">
       
@@ -53,6 +52,7 @@ const ShortenForm = () => {
             {/* Button */}
             <button
               type="submit"
+              
               className="rounded-xl bg-blue-600 px-7 py-3.5 font-semibold text-white shadow-lg shadow-blue-600/20 transition duration-200 hover:bg-blue-500 hover:shadow-blue-500/30 active:scale-95"
             >
               Shorten URL →

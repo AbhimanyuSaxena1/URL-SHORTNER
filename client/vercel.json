@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://url-shortner-6gdv.onrender.com/:path"
+      "destination": "https://url-shortner-6gdv.onrender.com/api/:path"
     }
   ]
 }
