@@ -49,7 +49,7 @@ const UrlList = () => {
         <div className="space-y-3">
 
           {shortenedUrls.map((urlObj) => {
-            const shortUrl = `import.meta.env.VITE_FRONTEND_URL/${urlObj.code}`
+            const shortUrl = `${import.meta.env.VITE_FRONTEND_URL/urlObj.code}`
 
             return (
               <div
